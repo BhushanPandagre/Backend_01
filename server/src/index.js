@@ -7,7 +7,17 @@ dotenv.config({
   path: "./env",
 });
 
-connectDB();
+const port = process.env.PORT || 8080;
+
+connectDB()
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`App Is Listening On Port:${port}`);
+    });
+  })
+  .catch((err) => {
+    console.log("MOngoDB Connection Failed..!!", err);
+  });
 
 //IIFE
 
